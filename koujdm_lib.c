@@ -183,7 +183,8 @@ long double complex hat_f2(long double complex alpha, Parameters prm, void *prm2
 
     complex long double Aalpha, Balpha;
     Aalpha = aux(beta1,beta2,prm.eta1,prm2_->b)+aux(beta2,beta1,prm.eta1,prm2_->b);
-    Balpha = aux(beta1,beta2,prm.eta1,prm2_->b)*(beta2-prm.eta1)/prm.eta1 - aux(beta2,beta1,prm.eta1,prm2_->b)*(prm.eta1-beta1)/prm.eta1;
+    Balpha = aux(beta1,beta2,prm.eta1,prm2_->b)*(beta2-prm.eta1)/prm.eta1
+        -aux(beta2,beta1,prm.eta1,prm2_->b)*(prm.eta1-beta1)/prm.eta1;
 
     long double complex C3,C4,D3,D4;
     C3 = 1./(beta3*dG(-beta3,prm));
@@ -702,38 +703,198 @@ Resolvent resolvent(Parameters prm) {
     a = -128.*sigma4*(eta1p2*eta1p2);
     // b
     aux1 = 128*(eta12+eta22)*(eta1p2*eta1p2)*sigma6;
-    aux2 = 128*eta1p2*(2*eta12*mu+2*eta1*lambda*p-2*eta22*mu-2*eta2*lambda*p-5*eta1*lambda-3*eta2*lambda)*sigma4;
+    aux2 = 128*eta1p2*(2*eta12*mu+2*eta1*lambda*p-2*eta22*mu-2*eta2*lambda*p-5*eta1*lambda
+        -3*eta2*lambda)*sigma4;
     aux3 = -64*mu2*(eta1p2*eta1p2)*sigma2;
     b = aux1+aux2+aux3;
     // c
     aux1 = -32*(eta14+4*eta12*eta22+eta24)*(eta1p2*eta1p2)*sigma8;
     aux2 = 128*mu2*eta1p2*(eta12*mu+eta1*lambda*p-eta22*mu-eta2*lambda*p-2*eta1*lambda-eta2*lambda)*sigma2;
-    aux3 = (-64*eta14*mu2+384*eta13*eta2*mu2-1088*eta13*lambda*mu*p+896*eta12*eta22*mu2-1728*eta12*eta2*lambda*mu*p-128*eta12*lambda2*p2+384*eta1*eta23*mu2-1728*eta1*eta22*lambda*mu*p-256*eta1*eta2*lambda2*p2-64*eta24*mu2-1088*eta23*lambda*mu*p-128*eta22*lambda2*p2+1024*eta13*lambda*mu+1344*eta12*eta2*lambda*mu+1024*eta12*lambda2*p+384*eta1*eta22*lambda*mu+256*eta1*eta2*lambda2*p+64*eta23*lambda*mu-768*eta22*lambda2*p-1280*eta12*lambda2-1536*eta1*eta2*lambda2-384*eta22*lambda2)*sigma4;
-    aux4 = -(64*eta1p2)*(2*eta14*mu-2*eta13*eta2*mu+13*eta13*lambda*p+7*eta12*eta2*lambda*p+2*eta1*eta23*mu-7*eta1*eta22*lambda*p-2*eta24*mu-13*eta23*lambda*p-8*eta13*lambda-6*eta12*eta2*lambda+eta1*eta22*lambda+5*eta23*lambda)*sigma6;
+    aux3 = (-64*eta14*mu2+384*eta13*eta2*mu2-1088*eta13*lambda*mu*p+896*eta12*eta22*mu2
+        -1728*eta12*eta2*lambda*mu*p-128*eta12*lambda2*p2+384*eta1*eta23*mu2-1728*eta1*eta22*lambda*mu*p
+        -256*eta1*eta2*lambda2*p2-64*eta24*mu2-1088*eta23*lambda*mu*p-128*eta22*lambda2*p2
+        +1024*eta13*lambda*mu+1344*eta12*eta2*lambda*mu+1024*eta12*lambda2*p+384*eta1*eta22*lambda*mu
+        +256*eta1*eta2*lambda2*p+64*eta23*lambda*mu-768*eta22*lambda2*p-1280*eta12*lambda2
+        -1536*eta1*eta2*lambda2-384*eta22*lambda2)*sigma4;
+    aux4 = -(64*eta1p2)*(2*eta14*mu-2*eta13*eta2*mu+13*eta13*lambda*p+7*eta12*eta2*lambda*p
+        +2*eta1*eta23*mu-7*eta1*eta22*lambda*p-2*eta24*mu-13*eta23*lambda*p-8*eta13*lambda
+        -6*eta12*eta2*lambda+eta1*eta22*lambda+5*eta23*lambda)*sigma6;
     c = aux1+aux2+aux3+aux4;
     // d
     aux1 = 32*eta22*eta12*(eta1p2*eta1p2)*(eta12+eta22)*sigma10;
-    aux2 = -(32*eta1p2)*(2*eta15*eta2*mu-3*eta15*lambda*p-2*eta14*eta22*mu-eta14*eta2*lambda*p-4*eta13*eta22*lambda*p+2*eta12*eta24*mu+4*eta12*eta23*lambda*p-2*eta1*eta25*mu+eta1*eta24*lambda*p+3*eta25*lambda*p+3*eta15*lambda+3*eta14*eta2*lambda-6*eta13*eta22*lambda-10*eta12*eta23*lambda+2*eta1*eta24*lambda)*sigma8;
-    aux3 = -64*mu2*(eta14*mu2-2*eta13*eta2*mu2+8*eta13*lambda*mu*p-6*eta12*eta22*mu2+12*eta12*eta2*lambda*mu*p+eta12*lambda2*p2-2*eta1*eta23*mu2+12*eta1*eta22*lambda*mu*p+2*eta1*eta2*lambda2*p2+eta24*mu2+8*eta23*lambda*mu*p+eta22*lambda2*p2-6*eta13*lambda*mu-8*eta12*eta2*lambda*mu-6*eta12*lambda2*p-4*eta1*eta22*lambda*mu-2*eta1*eta2*lambda2*p-2*eta23*lambda*mu+4*eta22*lambda2*p+6*eta12*lambda2+6*eta1*eta2*lambda2+eta22*lambda2)*sigma2;
-    aux4 = (-64*eta15*mu3-256*eta14*eta2*mu3-64*eta14*lambda*mu2*p-192*eta13*eta22*mu3-704*eta13*eta2*lambda*mu2*p+1408*eta13*lambda2*mu*p2+192*eta12*eta23*mu3+1408*eta12*eta2*lambda2*mu*p2+256*eta1*eta24*mu3+704*eta1*eta23*lambda*mu2*p-1408*eta1*eta22*lambda2*mu*p2+64*eta25*mu3+64*eta24*lambda*mu2*p-1408*eta23*lambda2*mu*p2-192*eta14*lambda*mu2-64*eta13*eta2*lambda*mu2-3264*eta13*lambda2*mu*p-384*eta12*eta22*lambda*mu2-5440*eta12*eta2*lambda2*mu*p-384*eta12*lambda3*p2-768*eta1*eta23*lambda*mu2-2624*eta1*eta22*lambda2*mu*p-768*eta1*eta2*lambda3*p2-256*eta24*lambda*mu2-448*eta23*lambda2*mu*p-384*eta22*lambda3*p2+1536*eta13*lambda2*mu+2496*eta12*eta2*lambda2*mu+1536*eta12*lambda3*p+1536*eta1*eta22*lambda2*mu+768*eta1*eta2*lambda3*p+320*eta23*lambda2*mu-768*eta22*lambda3*p-1280*eta12*lambda3-1024*eta1*eta2*lambda3-128*eta22*lambda3)*sigma4;
-    aux5 = (-16*eta16*mu2-288*eta15*eta2*mu2+352*eta15*lambda*mu*p-336*eta14*eta22*mu2-384*eta14*eta2*lambda*mu*p+1712*eta14*lambda2*p2-128*eta13*eta23*mu2-1376*eta13*eta22*lambda*mu*p+2112*eta13*eta2*lambda2*p2-336*eta12*eta24*mu2-1376*eta12*eta23*lambda*mu*p+800*eta12*eta22*lambda2*p2-288*eta1*eta25*mu2-384*eta1*eta24*lambda*mu*p+2112*eta1*eta23*lambda2*p2-16*eta26*mu2+352*eta25*lambda*mu*p+1712*eta24*lambda2*p2-384*eta15*lambda*mu-576*eta14*eta2*lambda*mu-2496*eta14*lambda2*p+128*eta13*eta22*lambda*mu-3936*eta13*eta2*lambda2*p+1248*eta12*eta23*lambda*mu-800*eta12*eta22*lambda2*p+960*eta1*eta24*lambda*mu-288*eta1*eta23*lambda2*p+32*eta25*lambda*mu-928*eta24*lambda2*p+768*eta14*lambda2+1152*eta13*eta2*lambda2-144*eta12*eta22*lambda2-672*eta1*eta23*lambda2-16*eta24*lambda2)*sigma6;
+    aux2 = -(32*eta1p2)*(2*eta15*eta2*mu-3*eta15*lambda*p-2*eta14*eta22*mu-eta14*eta2*lambda*p
+        -4*eta13*eta22*lambda*p+2*eta12*eta24*mu+4*eta12*eta23*lambda*p-2*eta1*eta25*mu
+        +eta1*eta24*lambda*p+3*eta25*lambda*p+3*eta15*lambda+3*eta14*eta2*lambda-6*eta13*eta22*lambda
+        -10*eta12*eta23*lambda+2*eta1*eta24*lambda)*sigma8;
+    aux3 = -64*mu2*(eta14*mu2-2*eta13*eta2*mu2+8*eta13*lambda*mu*p-6*eta12*eta22*mu2
+        +12*eta12*eta2*lambda*mu*p+eta12*lambda2*p2-2*eta1*eta23*mu2+12*eta1*eta22*lambda*mu*p
+        +2*eta1*eta2*lambda2*p2+eta24*mu2+8*eta23*lambda*mu*p+eta22*lambda2*p2-6*eta13*lambda*mu
+        -8*eta12*eta2*lambda*mu-6*eta12*lambda2*p-4*eta1*eta22*lambda*mu-2*eta1*eta2*lambda2*p
+        -2*eta23*lambda*mu+4*eta22*lambda2*p+6*eta12*lambda2+6*eta1*eta2*lambda2+eta22*lambda2)*sigma2;
+    aux4 = (-64*eta15*mu3-256*eta14*eta2*mu3-64*eta14*lambda*mu2*p-192*eta13*eta22*mu3
+        -704*eta13*eta2*lambda*mu2*p+1408*eta13*lambda2*mu*p2+192*eta12*eta23*mu3
+        +1408*eta12*eta2*lambda2*mu*p2+256*eta1*eta24*mu3+704*eta1*eta23*lambda*mu2*p
+        -1408*eta1*eta22*lambda2*mu*p2+64*eta25*mu3+64*eta24*lambda*mu2*p-1408*eta23*lambda2*mu*p2
+        -192*eta14*lambda*mu2-64*eta13*eta2*lambda*mu2-3264*eta13*lambda2*mu*p
+        -384*eta12*eta22*lambda*mu2-5440*eta12*eta2*lambda2*mu*p-384*eta12*lambda3*p2
+        -768*eta1*eta23*lambda*mu2-2624*eta1*eta22*lambda2*mu*p-768*eta1*eta2*lambda3*p2
+        -256*eta24*lambda*mu2-448*eta23*lambda2*mu*p-384*eta22*lambda3*p2+1536*eta13*lambda2*mu
+        +2496*eta12*eta2*lambda2*mu+1536*eta12*lambda3*p+1536*eta1*eta22*lambda2*mu
+        +768*eta1*eta2*lambda3*p+320*eta23*lambda2*mu-768*eta22*lambda3*p-1280*eta12*lambda3
+        -1024*eta1*eta2*lambda3-128*eta22*lambda3)*sigma4;
+    aux5 = (-16*eta16*mu2-288*eta15*eta2*mu2+352*eta15*lambda*mu*p-336*eta14*eta22*mu2
+        -384*eta14*eta2*lambda*mu*p+1712*eta14*lambda2*p2-128*eta13*eta23*mu2
+        -1376*eta13*eta22*lambda*mu*p+2112*eta13*eta2*lambda2*p2-336*eta12*eta24*mu2
+        -1376*eta12*eta23*lambda*mu*p+800*eta12*eta22*lambda2*p2-288*eta1*eta25*mu2
+        -384*eta1*eta24*lambda*mu*p+2112*eta1*eta23*lambda2*p2-16*eta26*mu2+352*eta25*lambda*mu*p
+        +1712*eta24*lambda2*p2-384*eta15*lambda*mu-576*eta14*eta2*lambda*mu-2496*eta14*lambda2*p
+        +128*eta13*eta22*lambda*mu-3936*eta13*eta2*lambda2*p+1248*eta12*eta23*lambda*mu
+        -800*eta12*eta22*lambda2*p+960*eta1*eta24*lambda*mu-288*eta1*eta23*lambda2*p+32*eta25*lambda*mu
+        -928*eta24*lambda2*p+768*eta14*lambda2+1152*eta13*eta2*lambda2-144*eta12*eta22*lambda2
+        -672*eta1*eta23*lambda2-16*eta24*lambda2)*sigma6;
     d = aux1+aux2+aux3+aux4+aux5;
     // e
-    aux1 = (32*eta16*eta23*mu+80*eta16*eta22*lambda*p+32*eta15*eta24*mu+192*eta15*eta23*lambda*p-32*eta14*eta25*mu-32*eta13*eta26*mu-192*eta13*eta25*lambda*p-80*eta12*eta26*lambda*p-80*eta16*eta22*lambda-160*eta15*eta23*lambda-48*eta14*eta24*lambda+32*eta13*eta25*lambda)*sigma10;
-    aux2 = (-16*eta16*eta22*mu2-16*eta16*eta2*lambda*mu*p-96*eta16*lambda2*p2+96*eta15*eta23*mu2+256*eta15*eta22*lambda*mu*p-208*eta15*eta2*lambda2*p2+224*eta14*eta24*mu2+1232*eta14*eta23*lambda*mu*p+1152*eta14*eta22*lambda2*p2+96*eta13*eta25*mu2+1232*eta13*eta24*lambda*mu*p+2528*eta13*eta23*lambda2*p2-16*eta12*eta26*mu2+256*eta12*eta25*lambda*mu*p+1152*eta12*eta24*lambda2*p2-16*eta1*eta26*lambda*mu*p-208*eta1*eta25*lambda2*p2-96*eta26*lambda2*p2+16*eta16*eta2*lambda*mu+192*eta16*lambda2*p-288*eta15*eta22*lambda*mu+400*eta15*eta2*lambda2*p-784*eta14*eta23*lambda*mu-1408*eta14*eta22*lambda2*p-448*eta13*eta24*lambda*mu-2528*eta13*eta23*lambda2*p+32*eta12*eta25*lambda*mu-896*eta12*eta24*lambda2*p+16*eta1*eta25*lambda2*p-96*eta16*lambda2-192*eta15*eta2*lambda2+240*eta14*eta22*lambda2+352*eta13*eta23*lambda2-16*eta12*eta24*lambda2)*sigma8;
+    aux1 = (32*eta16*eta23*mu+80*eta16*eta22*lambda*p+32*eta15*eta24*mu+192*eta15*eta23*lambda*p
+        -32*eta14*eta25*mu-32*eta13*eta26*mu-192*eta13*eta25*lambda*p-80*eta12*eta26*lambda*p
+        -80*eta16*eta22*lambda-160*eta15*eta23*lambda-48*eta14*eta24*lambda+32*eta13*eta25*lambda)*sigma10;
+    aux2 = (-16*eta16*eta22*mu2-16*eta16*eta2*lambda*mu*p-96*eta16*lambda2*p2+96*eta15*eta23*mu2
+        +256*eta15*eta22*lambda*mu*p-208*eta15*eta2*lambda2*p2+224*eta14*eta24*mu2
+        +1232*eta14*eta23*lambda*mu*p+1152*eta14*eta22*lambda2*p2+96*eta13*eta25*mu2
+        +1232*eta13*eta24*lambda*mu*p+2528*eta13*eta23*lambda2*p2-16*eta12*eta26*mu2
+        +256*eta12*eta25*lambda*mu*p+1152*eta12*eta24*lambda2*p2-16*eta1*eta26*lambda*mu*p
+        -208*eta1*eta25*lambda2*p2-96*eta26*lambda2*p2+16*eta16*eta2*lambda*mu+192*eta16*lambda2*p
+        -288*eta15*eta22*lambda*mu+400*eta15*eta2*lambda2*p-784*eta14*eta23*lambda*mu
+        -1408*eta14*eta22*lambda2*p-448*eta13*eta24*lambda*mu-2528*eta13*eta23*lambda2*p
+        +32*eta12*eta25*lambda*mu-896*eta12*eta24*lambda2*p+16*eta1*eta25*lambda2*p-96*eta16*lambda2
+        -192*eta15*eta2*lambda2+240*eta14*eta22*lambda2+352*eta13*eta23*lambda2
+        -16*eta12*eta24*lambda2)*sigma8;
     aux3 = (-8*eta16*eta24-16*eta15*eta25-8*eta14*eta26)*sigma12;
-    aux4 = (-128*eta14*eta2*mu5+128*eta14*lambda*mu4*p-128*eta13*eta22*mu5-128*eta13*eta2*lambda*mu4*p+640*eta13*lambda2*mu3*p2+128*eta12*eta23*mu5+640*eta12*eta2*lambda2*mu3*p2+128*eta1*eta24*mu5+128*eta1*eta23*lambda*mu4*p-640*eta1*eta22*lambda2*mu3*p2-128*eta24*lambda*mu4*p-640*eta23*lambda2*mu3*p2-128*eta14*lambda*mu4-256*eta13*eta2*lambda*mu4-1024*eta13*lambda2*mu3*p-512*eta12*eta22*lambda*mu4-1664*eta12*eta2*lambda2*mu3*p-128*eta12*lambda3*mu2*p2-384*eta1*eta23*lambda*mu4-384*eta1*eta22*lambda2*mu3*p-256*eta1*eta2*lambda3*mu2*p2+256*eta23*lambda2*mu3*p-128*eta22*lambda3*mu2*p2+384*eta13*lambda2*mu3+640*eta12*eta2*lambda2*mu3+384*eta12*lambda3*mu2*p+384*eta1*eta22*lambda2*mu3+256*eta1*eta2*lambda3*mu2*p-128*eta22*lambda3*mu2*p-256*eta12*lambda3*mu2-128*eta1*eta2*lambda3*mu2)*sigma2;
-    aux5 = (-128*eta15*eta2*mu4+128*eta15*lambda*mu3*p-256*eta14*eta22*mu4-448*eta14*eta2*lambda*mu3*p+320*eta14*lambda2*mu2*p2-256*eta13*eta23*mu4-1728*eta13*eta22*lambda*mu3*p-1600*eta13*eta2*lambda2*mu2*p2-576*eta13*lambda3*mu*p3-256*eta12*eta24*mu4-1728*eta12*eta23*lambda*mu3*p-3840*eta12*eta22*lambda2*mu2*p2-1728*eta12*eta2*lambda3*mu*p3-128*eta1*eta25*mu4-448*eta1*eta24*lambda*mu3*p-1600*eta1*eta23*lambda2*mu2*p2-1728*eta1*eta22*lambda3*mu*p3+128*eta25*lambda*mu3*p+320*eta24*lambda2*mu2*p2-576*eta23*lambda3*mu*p3-128*eta15*lambda*mu3-192*eta14*eta2*lambda*mu3-128*eta14*lambda2*mu2*p+512*eta13*eta22*lambda*mu3+1728*eta13*eta2*lambda2*mu2*p+2816*eta13*lambda3*mu*p2+1216*eta12*eta23*lambda*mu3+3840*eta12*eta22*lambda2*mu2*p+4544*eta12*eta2*lambda3*mu*p2+640*eta1*eta24*lambda*mu3+1472*eta1*eta23*lambda2*mu2*p+640*eta1*eta22*lambda3*mu*p2-512*eta24*lambda2*mu2*p-1088*eta23*lambda3*mu*p2-192*eta14*lambda2*mu2-1280*eta13*eta2*lambda2*mu2-3264*eta13*lambda3*mu*p-2304*eta12*eta22*lambda2*mu2-5696*eta12*eta2*lambda3*mu*p-384*eta12*lambda4*p2-1152*eta1*eta23*lambda2*mu2-1792*eta1*eta22*lambda3*mu*p-768*eta1*eta2*lambda4*p2+640*eta23*lambda3*mu*p-384*eta22*lambda4*p2+1024*eta13*lambda3*mu+1984*eta12*eta2*lambda3*mu+1024*eta12*lambda4*p+896*eta1*eta22*lambda3*mu+768*eta1*eta2*lambda4*p-256*eta22*lambda4*p-640*eta12*lambda4-256*eta1*eta2*lambda4)*sigma4;
-    aux6 = (-32*eta16*eta2*mu3+32*eta16*lambda*mu2*p-128*eta15*eta22*mu3-96*eta15*eta2*lambda*mu2*p-320*eta15*lambda2*mu*p2-96*eta14*eta23*mu3-576*eta14*eta22*lambda*mu2*p-1344*eta14*eta2*lambda2*mu*p2-1440*eta14*lambda3*p3+96*eta13*eta24*mu3-1024*eta13*eta22*lambda2*mu*p2-2880*eta13*eta2*lambda3*p3+128*eta12*eta25*mu3+576*eta12*eta24*lambda*mu2*p+1024*eta12*eta23*lambda2*mu*p2+32*eta1*eta26*mu3+96*eta1*eta25*lambda*mu2*p+1344*eta1*eta24*lambda2*mu*p2+2880*eta1*eta23*lambda3*p3-32*eta26*lambda*mu2*p+320*eta25*lambda2*mu*p2+1440*eta24*lambda3*p3-32*eta16*lambda*mu2+704*eta15*lambda2*mu*p+96*eta14*eta22*lambda*mu2+2400*eta14*eta2*lambda2*mu*p+3424*eta14*lambda3*p2-320*eta13*eta23*lambda*mu2+864*eta13*eta22*lambda2*mu*p+6240*eta13*eta2*lambda3*p2-480*eta12*eta24*lambda*mu2-1184*eta12*eta23*lambda2*mu*p+1312*eta12*eta22*lambda3*p2-96*eta1*eta25*lambda*mu2-288*eta1*eta24*lambda2*mu*p-2400*eta1*eta23*lambda3*p2+64*eta25*lambda2*mu*p-896*eta24*lambda3*p2-384*eta15*lambda2*mu-1152*eta14*eta2*lambda2*mu-2496*eta14*lambda3*p-416*eta13*eta22*lambda2*mu-4032*eta13*eta2*lambda3*p+576*eta12*eta23*lambda2*mu-1312*eta12*eta22*lambda3*p+96*eta1*eta24*lambda2*mu+192*eta1*eta23*lambda3*p-32*eta24*lambda3*p+512*eta14*lambda3+640*eta13*eta2*lambda3-224*eta12*eta22*lambda3-32*eta1*eta23*lambda3)*sigma6;
+    aux4 = (-128*eta14*eta2*mu5+128*eta14*lambda*mu4*p-128*eta13*eta22*mu5-128*eta13*eta2*lambda*mu4*p
+        +640*eta13*lambda2*mu3*p2+128*eta12*eta23*mu5+640*eta12*eta2*lambda2*mu3*p2+128*eta1*eta24*mu5
+        +128*eta1*eta23*lambda*mu4*p-640*eta1*eta22*lambda2*mu3*p2-128*eta24*lambda*mu4*p
+        -640*eta23*lambda2*mu3*p2-128*eta14*lambda*mu4-256*eta13*eta2*lambda*mu4
+        -1024*eta13*lambda2*mu3*p-512*eta12*eta22*lambda*mu4-1664*eta12*eta2*lambda2*mu3*p
+        -128*eta12*lambda3*mu2*p2-384*eta1*eta23*lambda*mu4-384*eta1*eta22*lambda2*mu3*p
+        -256*eta1*eta2*lambda3*mu2*p2+256*eta23*lambda2*mu3*p-128*eta22*lambda3*mu2*p2
+        +384*eta13*lambda2*mu3+640*eta12*eta2*lambda2*mu3+384*eta12*lambda3*mu2*p
+        +384*eta1*eta22*lambda2*mu3+256*eta1*eta2*lambda3*mu2*p-128*eta22*lambda3*mu2*p
+        -256*eta12*lambda3*mu2-128*eta1*eta2*lambda3*mu2)*sigma2;
+    aux5 = (-128*eta15*eta2*mu4+128*eta15*lambda*mu3*p-256*eta14*eta22*mu4-448*eta14*eta2*lambda*mu3*p
+        +320*eta14*lambda2*mu2*p2-256*eta13*eta23*mu4-1728*eta13*eta22*lambda*mu3*p
+        -1600*eta13*eta2*lambda2*mu2*p2-576*eta13*lambda3*mu*p3-256*eta12*eta24*mu4
+        -1728*eta12*eta23*lambda*mu3*p-3840*eta12*eta22*lambda2*mu2*p2-1728*eta12*eta2*lambda3*mu*p3
+        -128*eta1*eta25*mu4-448*eta1*eta24*lambda*mu3*p-1600*eta1*eta23*lambda2*mu2*p2
+        -1728*eta1*eta22*lambda3*mu*p3+128*eta25*lambda*mu3*p+320*eta24*lambda2*mu2*p2
+        -576*eta23*lambda3*mu*p3-128*eta15*lambda*mu3-192*eta14*eta2*lambda*mu3-128*eta14*lambda2*mu2*p
+        +512*eta13*eta22*lambda*mu3+1728*eta13*eta2*lambda2*mu2*p+2816*eta13*lambda3*mu*p2
+        +1216*eta12*eta23*lambda*mu3+3840*eta12*eta22*lambda2*mu2*p+4544*eta12*eta2*lambda3*mu*p2
+        +640*eta1*eta24*lambda*mu3+1472*eta1*eta23*lambda2*mu2*p+640*eta1*eta22*lambda3*mu*p2
+        -512*eta24*lambda2*mu2*p-1088*eta23*lambda3*mu*p2-192*eta14*lambda2*mu2
+        -1280*eta13*eta2*lambda2*mu2-3264*eta13*lambda3*mu*p-2304*eta12*eta22*lambda2*mu2
+        -5696*eta12*eta2*lambda3*mu*p-384*eta12*lambda4*p2-1152*eta1*eta23*lambda2*mu2
+        -1792*eta1*eta22*lambda3*mu*p-768*eta1*eta2*lambda4*p2+640*eta23*lambda3*mu*p
+        -384*eta22*lambda4*p2+1024*eta13*lambda3*mu+1984*eta12*eta2*lambda3*mu+1024*eta12*lambda4*p
+        +896*eta1*eta22*lambda3*mu+768*eta1*eta2*lambda4*p-256*eta22*lambda4*p-640*eta12*lambda4
+        -256*eta1*eta2*lambda4)*sigma4;
+    aux6 = (-32*eta16*eta2*mu3+32*eta16*lambda*mu2*p-128*eta15*eta22*mu3-96*eta15*eta2*lambda*mu2*p
+        -320*eta15*lambda2*mu*p2-96*eta14*eta23*mu3-576*eta14*eta22*lambda*mu2*p
+        -1344*eta14*eta2*lambda2*mu*p2-1440*eta14*lambda3*p3+96*eta13*eta24*mu3
+        -1024*eta13*eta22*lambda2*mu*p2-2880*eta13*eta2*lambda3*p3+128*eta12*eta25*mu3
+        +576*eta12*eta24*lambda*mu2*p+1024*eta12*eta23*lambda2*mu*p2+32*eta1*eta26*mu3
+        +96*eta1*eta25*lambda*mu2*p+1344*eta1*eta24*lambda2*mu*p2+2880*eta1*eta23*lambda3*p3
+        -32*eta26*lambda*mu2*p+320*eta25*lambda2*mu*p2+1440*eta24*lambda3*p3-32*eta16*lambda*mu2
+        +704*eta15*lambda2*mu*p+96*eta14*eta22*lambda*mu2+2400*eta14*eta2*lambda2*mu*p
+        +3424*eta14*lambda3*p2-320*eta13*eta23*lambda*mu2+864*eta13*eta22*lambda2*mu*p
+        +6240*eta13*eta2*lambda3*p2-480*eta12*eta24*lambda*mu2-1184*eta12*eta23*lambda2*mu*p
+        +1312*eta12*eta22*lambda3*p2-96*eta1*eta25*lambda*mu2-288*eta1*eta24*lambda2*mu*p
+        -2400*eta1*eta23*lambda3*p2+64*eta25*lambda2*mu*p-896*eta24*lambda3*p2-384*eta15*lambda2*mu
+        -1152*eta14*eta2*lambda2*mu-2496*eta14*lambda3*p-416*eta13*eta22*lambda2*mu
+        -4032*eta13*eta2*lambda3*p+576*eta12*eta23*lambda2*mu-1312*eta12*eta22*lambda3*p
+        +96*eta1*eta24*lambda2*mu+192*eta1*eta23*lambda3*p-32*eta24*lambda3*p+512*eta14*lambda3
+        +640*eta13*eta2*lambda3-224*eta12*eta22*lambda3-32*eta1*eta23*lambda3)*sigma6;
     e = aux1+aux2+aux3+aux4+aux5+aux6;
     // f
-    aux1 = (-4*eta16*eta24*mu2-8*eta16*eta23*lambda*mu*p-4*eta16*eta22*lambda2*p2-8*eta15*eta25*mu2-24*eta15*eta24*lambda*mu*p-16*eta15*eta23*lambda2*p2-4*eta14*eta26*mu2-24*eta14*eta25*lambda*mu*p-24*eta14*eta24*lambda2*p2-8*eta13*eta26*lambda*mu*p-16*eta13*eta25*lambda2*p2-4*eta12*eta26*lambda2*p2+8*eta16*eta23*lambda*mu+8*eta16*eta22*lambda2*p+16*eta15*eta24*lambda*mu+24*eta15*eta23*lambda2*p+8*eta14*eta25*lambda*mu+24*eta14*eta24*lambda2*p+8*eta13*eta25*lambda2*p-4*eta16*eta22*lambda2-8*eta15*eta23*lambda2-4*eta14*eta24*lambda2)*sigma10;
-    aux2 = (16*eta16*eta23*mu3+64*eta16*eta22*lambda*mu2*p+80*eta16*eta2*lambda2*mu*p2+32*eta16*lambda3*p3+16*eta15*eta24*mu3+144*eta15*eta23*lambda*mu2*p+272*eta15*eta22*lambda2*mu*p2+144*eta15*eta2*lambda3*p3-16*eta14*eta25*mu3+192*eta14*eta23*lambda2*mu*p2+192*eta14*eta22*lambda3*p3-16*eta13*eta26*mu3-144*eta13*eta25*lambda*mu2*p-192*eta13*eta24*lambda2*mu*p2-64*eta12*eta26*lambda*mu2*p-272*eta12*eta25*lambda2*mu*p2-192*eta12*eta24*lambda3*p3-80*eta1*eta26*lambda2*mu*p2-144*eta1*eta25*lambda3*p3-32*eta26*lambda3*p3-64*eta16*eta22*lambda*mu2-160*eta16*eta2*lambda2*mu*p-96*eta16*lambda3*p2-96*eta15*eta23*lambda*mu2-416*eta15*eta22*lambda2*mu*p-352*eta15*eta2*lambda3*p2+16*eta14*eta24*lambda*mu2-160*eta14*eta23*lambda2*mu*p-336*eta14*eta22*lambda3*p2+48*eta13*eta25*lambda*mu2+224*eta13*eta24*lambda2*mu*p+80*eta13*eta23*lambda3*p2+128*eta12*eta25*lambda2*mu*p+240*eta12*eta24*lambda3*p2+80*eta1*eta25*lambda3*p2+80*eta16*eta2*lambda2*mu+96*eta16*lambda3*p+144*eta15*eta22*lambda2*mu+272*eta15*eta2*lambda3*p+16*eta14*eta23*lambda2*mu+160*eta14*eta22*lambda3*p-48*eta13*eta24*lambda2*mu-80*eta13*eta23*lambda3*p-64*eta12*eta24*lambda3*p-32*eta16*lambda3-64*eta15*eta2*lambda3-16*eta14*eta22*lambda3+16*eta13*eta23*lambda3)*sigma8;
-    aux3 = (-64*eta14*eta22*mu6-128*eta14*eta2*lambda*mu5*p-64*eta14*lambda2*mu4*p2-128*eta13*eta23*mu6-640*eta13*eta22*lambda*mu5*p-768*eta13*eta2*lambda2*mu4*p2-256*eta13*lambda3*mu3*p3-64*eta12*eta24*mu6-640*eta12*eta23*lambda*mu5*p-1408*eta12*eta22*lambda2*mu4*p2-768*eta12*eta2*lambda3*mu3*p3-128*eta1*eta24*lambda*mu5*p-768*eta1*eta23*lambda2*mu4*p2-768*eta1*eta22*lambda3*mu3*p3-64*eta24*lambda2*mu4*p2-256*eta23*lambda3*mu3*p3+128*eta14*eta2*lambda*mu5+128*eta14*lambda2*mu4*p+384*eta13*eta22*lambda*mu5+1152*eta13*eta2*lambda2*mu4*p+640*eta13*lambda3*mu3*p2+256*eta12*eta23*lambda*mu5+1408*eta12*eta22*lambda2*mu4*p+1408*eta12*eta2*lambda3*mu3*p2+384*eta1*eta23*lambda2*mu4*p+896*eta1*eta22*lambda3*mu3*p2+128*eta23*lambda3*mu3*p2-64*eta14*lambda2*mu4-384*eta13*eta2*lambda2*mu4-512*eta13*lambda3*mu3*p-384*eta12*eta22*lambda2*mu4-896*eta12*eta2*lambda3*mu3*p-64*eta12*lambda4*mu2*p2-384*eta1*eta22*lambda3*mu3*p-128*eta1*eta2*lambda4*mu2*p2-64*eta22*lambda4*mu2*p2+128*eta13*lambda3*mu3+256*eta12*eta2*lambda3*mu3+128*eta12*lambda4*mu2*p+128*eta1*eta2*lambda4*mu2*p-64*eta12*lambda4*mu2)*sigma2;
-    aux4 = (-64*eta15*eta22*mu5-128*eta15*eta2*lambda*mu4*p-64*eta15*lambda2*mu3*p2-64*eta14*eta23*mu5-448*eta14*eta22*lambda*mu4*p-576*eta14*eta2*lambda2*mu3*p2-192*eta14*lambda3*mu2*p3+64*eta13*eta24*mu5-512*eta13*eta22*lambda2*mu3*p2-384*eta13*eta2*lambda3*mu2*p3+64*eta12*eta25*mu5+448*eta12*eta24*lambda*mu4*p+512*eta12*eta23*lambda2*mu3*p2+128*eta1*eta25*lambda*mu4*p+576*eta1*eta24*lambda2*mu3*p2+384*eta1*eta23*lambda3*mu2*p3+64*eta25*lambda2*mu3*p2+192*eta24*lambda3*mu2*p3+128*eta15*eta2*lambda*mu4+128*eta15*lambda2*mu3*p+64*eta14*eta22*lambda*mu4+512*eta14*eta2*lambda2*mu3*p+320*eta14*lambda3*mu2*p2-448*eta13*eta23*lambda*mu4-1344*eta13*eta22*lambda2*mu3*p-1216*eta13*eta2*lambda3*mu2*p2-576*eta13*lambda4*mu*p3-384*eta12*eta24*lambda*mu4-2368*eta12*eta23*lambda2*mu3*p-3648*eta12*eta22*lambda3*mu2*p2-1728*eta12*eta2*lambda4*mu*p3-640*eta1*eta24*lambda2*mu3*p-2368*eta1*eta23*lambda3*mu2*p2-1728*eta1*eta22*lambda4*mu*p3-256*eta24*lambda3*mu2*p2-576*eta23*lambda4*mu*p3-64*eta15*lambda2*mu3+64*eta14*eta2*lambda2*mu3-64*eta14*lambda3*mu2*p+960*eta13*eta22*lambda2*mu3+2432*eta13*eta2*lambda3*mu2*p+1408*eta13*lambda4*mu*p2+896*eta12*eta23*lambda2*mu3+3648*eta12*eta22*lambda3*mu2*p+3136*eta12*eta2*lambda4*mu*p2+1152*eta1*eta23*lambda3*mu2*p+2048*eta1*eta22*lambda4*mu*p2+320*eta23*lambda4*mu*p2-64*eta14*lambda3*mu2-832*eta13*eta2*lambda3*mu2-1088*eta13*lambda4*mu*p-1024*eta12*eta22*lambda3*mu2-1984*eta12*eta2*lambda4*mu*p-128*eta12*lambda5*p2-896*eta1*eta22*lambda4*mu*p-256*eta1*eta2*lambda5*p2-128*eta22*lambda5*p2+256*eta13*lambda4*mu+576*eta12*eta2*lambda4*mu+256*eta12*lambda5*p+256*eta1*eta2*lambda5*p-128*eta12*lambda5)*sigma4;
-    aux5 = (-16*eta16*eta22*mu4-32*eta16*eta2*lambda*mu3*p-16*eta16*lambda2*mu2*p2+32*eta15*eta23*mu4+128*eta15*eta22*lambda*mu3*p+192*eta15*eta2*lambda2*mu2*p2+96*eta15*lambda3*mu*p3+96*eta14*eta24*mu4+736*eta14*eta23*lambda*mu3*p+1728*eta14*eta22*lambda2*mu2*p2+1536*eta14*eta2*lambda3*mu*p3+432*eta14*lambda4*p4+32*eta13*eta25*mu4+736*eta13*eta24*lambda*mu3*p+3040*eta13*eta23*lambda2*mu2*p2+4128*eta13*eta22*lambda3*mu*p3+1728*eta13*eta2*lambda4*p4-16*eta12*eta26*mu4+128*eta12*eta25*lambda*mu3*p+1728*eta12*eta24*lambda2*mu2*p2+4128*eta12*eta23*lambda3*mu*p3+2592*eta12*eta22*lambda4*p4-32*eta1*eta26*lambda*mu3*p+192*eta1*eta25*lambda2*mu2*p2+1536*eta1*eta24*lambda3*mu*p3+1728*eta1*eta23*lambda4*p4-16*eta26*lambda2*mu2*p2+96*eta25*lambda3*mu*p3+432*eta24*lambda4*p4+32*eta16*eta2*lambda*mu3+32*eta16*lambda2*mu2*p-192*eta15*eta22*lambda*mu3-480*eta15*eta2*lambda2*mu2*p-320*eta15*lambda3*mu*p2-512*eta14*eta23*lambda*mu3-2688*eta14*eta22*lambda2*mu2*p-3744*eta14*eta2*lambda3*mu*p2-1440*eta14*lambda4*p3-224*eta13*eta24*lambda*mu3-3040*eta13*eta23*lambda2*mu2*p-7456*eta13*eta22*lambda3*mu*p2-4608*eta13*eta2*lambda4*p3+64*eta12*eta25*lambda*mu3-768*eta12*eta24*lambda2*mu2*p-4928*eta12*eta23*lambda3*mu*p2-5184*eta12*eta22*lambda4*p3+96*eta1*eta25*lambda2*mu2*p-864*eta1*eta24*lambda3*mu*p2-2304*eta1*eta23*lambda4*p3+32*eta25*lambda3*mu*p2-288*eta24*lambda4*p3-16*eta16*lambda2*mu2+288*eta15*eta2*lambda2*mu2+352*eta15*lambda3*mu*p+864*eta14*eta22*lambda2*mu2+2784*eta14*eta2*lambda3*mu*p+1712*eta14*lambda4*p2+480*eta13*eta23*lambda2*mu2+3680*eta13*eta22*lambda3*mu*p+4128*eta13*eta2*lambda4*p2-96*eta12*eta24*lambda2*mu2+1152*eta12*eta23*lambda3*mu*p+3104*eta12*eta22*lambda4*p2-96*eta1*eta24*lambda3*mu*p+672*eta1*eta23*lambda4*p2-16*eta24*lambda4*p2-128*eta15*lambda3*mu-576*eta14*eta2*lambda3*mu-832*eta14*lambda4*p-416*eta13*eta22*lambda3*mu-1376*eta13*eta2*lambda4*p+64*eta12*eta23*lambda3*mu-512*eta12*eta22*lambda4*p+32*eta1*eta23*lambda4*p+128*eta14*lambda4+128*eta13*eta2*lambda4-16*eta12*eta22*lambda4)*sigma6;
+    aux1 = (-4*eta16*eta24*mu2-8*eta16*eta23*lambda*mu*p-4*eta16*eta22*lambda2*p2-8*eta15*eta25*mu2
+        -24*eta15*eta24*lambda*mu*p-16*eta15*eta23*lambda2*p2-4*eta14*eta26*mu2
+        -24*eta14*eta25*lambda*mu*p-24*eta14*eta24*lambda2*p2-8*eta13*eta26*lambda*mu*p
+        -16*eta13*eta25*lambda2*p2-4*eta12*eta26*lambda2*p2+8*eta16*eta23*lambda*mu
+        +8*eta16*eta22*lambda2*p+16*eta15*eta24*lambda*mu+24*eta15*eta23*lambda2*p
+        +8*eta14*eta25*lambda*mu+24*eta14*eta24*lambda2*p+8*eta13*eta25*lambda2*p
+        -4*eta16*eta22*lambda2-8*eta15*eta23*lambda2-4*eta14*eta24*lambda2)*sigma10;
+    aux2 = (16*eta16*eta23*mu3+64*eta16*eta22*lambda*mu2*p+80*eta16*eta2*lambda2*mu*p2
+        +32*eta16*lambda3*p3+16*eta15*eta24*mu3+144*eta15*eta23*lambda*mu2*p+272*eta15*eta22*lambda2*mu*p2+144*eta15*eta2*lambda3*p3-16*eta14*eta25*mu3+192*eta14*eta23*lambda2*mu*p2
+        +192*eta14*eta22*lambda3*p3-16*eta13*eta26*mu3-144*eta13*eta25*lambda*mu2*p
+        -192*eta13*eta24*lambda2*mu*p2-64*eta12*eta26*lambda*mu2*p-272*eta12*eta25*lambda2*mu*p2
+        -192*eta12*eta24*lambda3*p3-80*eta1*eta26*lambda2*mu*p2-144*eta1*eta25*lambda3*p3
+        -32*eta26*lambda3*p3-64*eta16*eta22*lambda*mu2-160*eta16*eta2*lambda2*mu*p-96*eta16*lambda3*p2
+        -96*eta15*eta23*lambda*mu2-416*eta15*eta22*lambda2*mu*p-352*eta15*eta2*lambda3*p2
+        +16*eta14*eta24*lambda*mu2-160*eta14*eta23*lambda2*mu*p-336*eta14*eta22*lambda3*p2
+        +48*eta13*eta25*lambda*mu2+224*eta13*eta24*lambda2*mu*p+80*eta13*eta23*lambda3*p2
+        +128*eta12*eta25*lambda2*mu*p+240*eta12*eta24*lambda3*p2+80*eta1*eta25*lambda3*p2
+        +80*eta16*eta2*lambda2*mu+96*eta16*lambda3*p+144*eta15*eta22*lambda2*mu+272*eta15*eta2*lambda3*p
+        +16*eta14*eta23*lambda2*mu+160*eta14*eta22*lambda3*p-48*eta13*eta24*lambda2*mu
+        -80*eta13*eta23*lambda3*p-64*eta12*eta24*lambda3*p-32*eta16*lambda3-64*eta15*eta2*lambda3
+        -16*eta14*eta22*lambda3+16*eta13*eta23*lambda3)*sigma8;
+    aux3 = (-64*eta14*eta22*mu6-128*eta14*eta2*lambda*mu5*p-64*eta14*lambda2*mu4*p2-128*eta13*eta23*mu6
+        -640*eta13*eta22*lambda*mu5*p-768*eta13*eta2*lambda2*mu4*p2-256*eta13*lambda3*mu3*p3
+        -64*eta12*eta24*mu6-640*eta12*eta23*lambda*mu5*p-1408*eta12*eta22*lambda2*mu4*p2
+        -768*eta12*eta2*lambda3*mu3*p3-128*eta1*eta24*lambda*mu5*p-768*eta1*eta23*lambda2*mu4*p2
+        -768*eta1*eta22*lambda3*mu3*p3-64*eta24*lambda2*mu4*p2-256*eta23*lambda3*mu3*p3
+        +128*eta14*eta2*lambda*mu5+128*eta14*lambda2*mu4*p+384*eta13*eta22*lambda*mu5
+        +1152*eta13*eta2*lambda2*mu4*p+640*eta13*lambda3*mu3*p2+256*eta12*eta23*lambda*mu5
+        +1408*eta12*eta22*lambda2*mu4*p+1408*eta12*eta2*lambda3*mu3*p2+384*eta1*eta23*lambda2*mu4*p
+        +896*eta1*eta22*lambda3*mu3*p2+128*eta23*lambda3*mu3*p2-64*eta14*lambda2*mu4
+        -384*eta13*eta2*lambda2*mu4-512*eta13*lambda3*mu3*p-384*eta12*eta22*lambda2*mu4
+        -896*eta12*eta2*lambda3*mu3*p-64*eta12*lambda4*mu2*p2-384*eta1*eta22*lambda3*mu3*p
+        -128*eta1*eta2*lambda4*mu2*p2-64*eta22*lambda4*mu2*p2+128*eta13*lambda3*mu3
+        +256*eta12*eta2*lambda3*mu3+128*eta12*lambda4*mu2*p+128*eta1*eta2*lambda4*mu2*p
+        -64*eta12*lambda4*mu2)*sigma2;
+    aux4 = (-64*eta15*eta22*mu5-128*eta15*eta2*lambda*mu4*p-64*eta15*lambda2*mu3*p2-64*eta14*eta23*mu5
+        -448*eta14*eta22*lambda*mu4*p-576*eta14*eta2*lambda2*mu3*p2-192*eta14*lambda3*mu2*p3
+        +64*eta13*eta24*mu5-512*eta13*eta22*lambda2*mu3*p2-384*eta13*eta2*lambda3*mu2*p3
+        +64*eta12*eta25*mu5+448*eta12*eta24*lambda*mu4*p+512*eta12*eta23*lambda2*mu3*p2
+        +128*eta1*eta25*lambda*mu4*p+576*eta1*eta24*lambda2*mu3*p2+384*eta1*eta23*lambda3*mu2*p3
+        +64*eta25*lambda2*mu3*p2+192*eta24*lambda3*mu2*p3+128*eta15*eta2*lambda*mu4
+        +128*eta15*lambda2*mu3*p+64*eta14*eta22*lambda*mu4+512*eta14*eta2*lambda2*mu3*p
+        +320*eta14*lambda3*mu2*p2-448*eta13*eta23*lambda*mu4-1344*eta13*eta22*lambda2*mu3*p
+        -1216*eta13*eta2*lambda3*mu2*p2-576*eta13*lambda4*mu*p3-384*eta12*eta24*lambda*mu4
+        -2368*eta12*eta23*lambda2*mu3*p-3648*eta12*eta22*lambda3*mu2*p2-1728*eta12*eta2*lambda4*mu*p3
+        -640*eta1*eta24*lambda2*mu3*p-2368*eta1*eta23*lambda3*mu2*p2-1728*eta1*eta22*lambda4*mu*p3
+        -256*eta24*lambda3*mu2*p2-576*eta23*lambda4*mu*p3-64*eta15*lambda2*mu3+64*eta14*eta2*lambda2*mu3
+        -64*eta14*lambda3*mu2*p+960*eta13*eta22*lambda2*mu3+2432*eta13*eta2*lambda3*mu2*p
+        +1408*eta13*lambda4*mu*p2+896*eta12*eta23*lambda2*mu3+3648*eta12*eta22*lambda3*mu2*p
+        +3136*eta12*eta2*lambda4*mu*p2+1152*eta1*eta23*lambda3*mu2*p+2048*eta1*eta22*lambda4*mu*p2
+        +320*eta23*lambda4*mu*p2-64*eta14*lambda3*mu2-832*eta13*eta2*lambda3*mu2
+        -1088*eta13*lambda4*mu*p-1024*eta12*eta22*lambda3*mu2-1984*eta12*eta2*lambda4*mu*p
+        -128*eta12*lambda5*p2-896*eta1*eta22*lambda4*mu*p-256*eta1*eta2*lambda5*p2-128*eta22*lambda5*p2
+        +256*eta13*lambda4*mu+576*eta12*eta2*lambda4*mu+256*eta12*lambda5*p+256*eta1*eta2*lambda5*p
+        -128*eta12*lambda5)*sigma4;
+    aux5 = (-16*eta16*eta22*mu4-32*eta16*eta2*lambda*mu3*p-16*eta16*lambda2*mu2*p2+32*eta15*eta23*mu4
+        +128*eta15*eta22*lambda*mu3*p+192*eta15*eta2*lambda2*mu2*p2+96*eta15*lambda3*mu*p3
+        +96*eta14*eta24*mu4+736*eta14*eta23*lambda*mu3*p+1728*eta14*eta22*lambda2*mu2*p2
+        +1536*eta14*eta2*lambda3*mu*p3+432*eta14*lambda4*p4+32*eta13*eta25*mu4
+        +736*eta13*eta24*lambda*mu3*p+3040*eta13*eta23*lambda2*mu2*p2+4128*eta13*eta22*lambda3*mu*p3
+        +1728*eta13*eta2*lambda4*p4-16*eta12*eta26*mu4+128*eta12*eta25*lambda*mu3*p
+        +1728*eta12*eta24*lambda2*mu2*p2+4128*eta12*eta23*lambda3*mu*p3+2592*eta12*eta22*lambda4*p4
+        -32*eta1*eta26*lambda*mu3*p+192*eta1*eta25*lambda2*mu2*p2+1536*eta1*eta24*lambda3*mu*p3
+        +1728*eta1*eta23*lambda4*p4-16*eta26*lambda2*mu2*p2+96*eta25*lambda3*mu*p3+432*eta24*lambda4*p4
+        +32*eta16*eta2*lambda*mu3+32*eta16*lambda2*mu2*p-192*eta15*eta22*lambda*mu3
+        -480*eta15*eta2*lambda2*mu2*p-320*eta15*lambda3*mu*p2-512*eta14*eta23*lambda*mu3
+        -2688*eta14*eta22*lambda2*mu2*p-3744*eta14*eta2*lambda3*mu*p2-1440*eta14*lambda4*p3
+        -224*eta13*eta24*lambda*mu3-3040*eta13*eta23*lambda2*mu2*p-7456*eta13*eta22*lambda3*mu*p2
+        -4608*eta13*eta2*lambda4*p3+64*eta12*eta25*lambda*mu3-768*eta12*eta24*lambda2*mu2*p
+        -4928*eta12*eta23*lambda3*mu*p2-5184*eta12*eta22*lambda4*p3+96*eta1*eta25*lambda2*mu2*p
+        -864*eta1*eta24*lambda3*mu*p2-2304*eta1*eta23*lambda4*p3+32*eta25*lambda3*mu*p2
+        -288*eta24*lambda4*p3-16*eta16*lambda2*mu2+288*eta15*eta2*lambda2*mu2+352*eta15*lambda3*mu*p
+        +864*eta14*eta22*lambda2*mu2+2784*eta14*eta2*lambda3*mu*p+1712*eta14*lambda4*p2
+        +480*eta13*eta23*lambda2*mu2+3680*eta13*eta22*lambda3*mu*p+4128*eta13*eta2*lambda4*p2
+        -96*eta12*eta24*lambda2*mu2+1152*eta12*eta23*lambda3*mu*p+3104*eta12*eta22*lambda4*p2
+        -96*eta1*eta24*lambda3*mu*p+672*eta1*eta23*lambda4*p2-16*eta24*lambda4*p2-128*eta15*lambda3*mu
+        -576*eta14*eta2*lambda3*mu-832*eta14*lambda4*p-416*eta13*eta22*lambda3*mu-1376*eta13*eta2*lambda4*p
+        +64*eta12*eta23*lambda3*mu-512*eta12*eta22*lambda4*p+32*eta1*eta23*lambda4*p+128*eta14*lambda4
+        +128*eta13*eta2*lambda4-16*eta12*eta22*lambda4)*sigma6;
     f = aux1+aux2+aux3+aux4+aux5;
 
     Resolvent r={a,b,c,d,e,f};
-    return r;//a*pow(alpha,5)+b*pow(alpha,4)+c*pow(alpha,3)+d*(alpha*alpha)+e*alpha+f;
+    return r;
 }
