@@ -28,10 +28,10 @@ typedef struct {
     long double complex x1,x2,x3,x4;
 } QuarticSolutions;
 
-// resolvent
+// resultant
 typedef struct {
     long double a,b,c,d,e,f;
-} Resolvent;
+} Resultant;
 
 // generic parameter structure
 typedef struct {
@@ -86,8 +86,8 @@ int64_t binomial(int64_t, int64_t);
 Quartic polynomial(long double complex, Parameters);
 // roots of quartic polynomial
 QuarticSolutions quartic_solve(Quartic);
-// resolvent of a quartic polynomial
-Resolvent resolvent(Parameters);
+// resultant of a quartic polynomial
+Resultant resultant(Parameters);
 
 // first block functions
 long double suma(long double complex (*f)(long double complex, Parameters, void*), int64_t, int64_t, int64_t, Parameters, void*);

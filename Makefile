@@ -3,7 +3,7 @@ LFLAGS= -lm -lgmp -lmpfr -lmpc
 
 target: all
 
-all: f1 f2 f3 resolvent
+all: f1 f2 f3 resultant
 
 # Main executable
 f1: f1.o koujdm_lib.o
@@ -15,8 +15,8 @@ f2: f2.o koujdm_lib.o
 f3: f3.o koujdm_lib.o
 	gcc $(CFLAGS) f3.o koujdm_lib.o -o f3 $(LFLAGS)
 
-resolvent: resolvent.o koujdm_lib.o
-	gcc $(CFLAGS) resolvent.o koujdm_lib.o -o resolvent $(LFLAGS)
+resultant: resultant.o koujdm_lib.o
+	gcc $(CFLAGS) resultant.o koujdm_lib.o -o resultant $(LFLAGS)
 
 # Objects compilation
 f1.o: f1.c
@@ -28,8 +28,8 @@ f2.o: f2.c
 f3.o: f3.c
 	gcc $(CFLAGS) -c f3.c $(LFLAGS)
 
-resolvent.o: resolvent.c
-	gcc $(CFLAGS) -c resolvent.c $(LFLAGS)
+resultant.o: resultant.c
+	gcc $(CFLAGS) -c resultant.c $(LFLAGS)
 
 koujdm_lib.o: koujdm_lib.c koujdm_lib.h
 	gcc $(CFLAGS) -c koujdm_lib.c $(LFLAGS)
@@ -45,10 +45,10 @@ runf2: f2
 runf3: f3
 	./f3 500 0.1 0.2 3 50 100/3 0.5 1 0.3 10 2
 
-runresolvent: resolvent
-	./resolvent 0.1 0.2 3 50 33.33333333333 0.5
+runresultant: resultant
+	./resultant 0.1 0.2 3 50 33.33333333333 0.5
 
 
 # Cleaning directives
 clean:
-	rm *o f1 f2 f3 resolvent
+	rm *o f1 f2 f3 resultant

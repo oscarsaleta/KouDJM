@@ -16,8 +16,8 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    Resolvent r = resolvent(prm);
-    printf("Resolvent = (%10.9Le) * alpha^5 +\n\t (%10.9Le) * alpha^4 +\n\t (%10.9Le) * alpha^3 +\n\t (%10.9Le) * alpha^2 +\n\t (%10.9Le) * alpha +\n\t (%10.9Le)\n",r.a,r.b,r.c,r.d,r.e,r.f);
+    Resultant r = resultant(prm);
+    printf("Resultant = (%10.9Le) * alpha^5 +\n\t (%10.9Le) * alpha^4 +\n\t (%10.9Le) * alpha^3 +\n\t (%10.9Le) * alpha^2 +\n\t (%10.9Le) * alpha +\n\t (%10.9Le)\n",r.a,r.b,r.c,r.d,r.e,r.f);
 
 
     return 0;

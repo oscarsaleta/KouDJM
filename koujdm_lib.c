@@ -650,9 +650,9 @@ void gaver(mpc_t result, void (*f)(mpc_t, mpc_t, Parameters_mp, void*), int64_t 
 
 
 
-// resolvent (resultant of the polynomial P_alpha, numerator
-// of G(z) in [5], and its derivative)
-Resolvent resolvent(Parameters prm) {
+// resultant of the polynomial P_alpha, numerator
+// of G(z) in [5], and its derivative
+Resultant resultant(Parameters prm) {
     long double a,b,c,d,e,f;
     
     long double mu,sigma,eta1,eta2,lambda,p;
@@ -698,7 +698,7 @@ Resolvent resolvent(Parameters prm) {
 
     long double eta1p2  = eta1+eta2;
 
-    // resolvent is a*alpha^5+...+e*alpha+f
+    // resultant is a*alpha^5+...+e*alpha+f
     // a
     a = -128.*sigma4*(eta1p2*eta1p2);
     // b
@@ -895,6 +895,6 @@ Resolvent resolvent(Parameters prm) {
         +128*eta13*eta2*lambda4-16*eta12*eta22*lambda4)*sigma6;
     f = aux1+aux2+aux3+aux4+aux5;
 
-    Resolvent r={a,b,c,d,e,f};
+    Resultant r={a,b,c,d,e,f};
     return r;
 }
